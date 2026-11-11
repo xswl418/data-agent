@@ -5,9 +5,8 @@ from typing import Literal
 from typing_extensions import TypedDict, Annotated
 from openai import OpenAI
 from langgraph.graph import StateGraph, START, END
-from tools import group_and_agg, filter_and_agg, get_summary
+from tools import group_and_agg, filter_and_agg, get_summary, compare_groups, detect_anomaly
 from database import init_db, save_task
-
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     base_url=os.getenv("OPENAI_URL"),
@@ -17,6 +16,8 @@ tool_map = {
     "group_and_agg": group_and_agg,
     "filter_and_agg": filter_and_agg,
     "get_summary": get_summary,
+    "compare_groups": compare_groups,
+    "detect_anomaly": detect_anomaly,
 }
 
 tool_definitions = [
@@ -63,6 +64,40 @@ tool_definitions = [
                 "type": "object",
                 "properties": {},
                 "required": []
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_groups",
+            "description": "对比两个分组的指标，比如东部和西部收入差多少",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "group_col": {"type": "string", "description": "在哪一列里进行分组"},
+                    "group_a": {"type": "string", "description": "分组a"},
+                    "group_b": {"type": "string", "description": "分组b"},
+                    "value_col": {"type": "string", "description": "对哪一列进行聚合"},
+                    "agg_func": {"type": "string", "description": "聚合函数名称"},
+                },
+                "required": ["group_col", "group_a", "group_b", "value_col", "agg_func"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "detect_anomaly",
+            "description": "检测某列的异常值，比如哪个品类的退款率异常高",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "group_col": {"type": "string", "description": "对哪列筛选"},
+                    "value_col": {"type": "string", "description": "检测哪列的异常"},
+                    "group_val": {"type": "string", "description": "筛选值"},
+                },
+                "required": ["value_col"]
             }
         }
     }
