@@ -1,0 +1,7 @@
+[
+    {"id": "E01", "question": "各品类总收入中哪个品类最高，收入是多少？", "must_contain": ["Electronics", "1,829,899"]},
+    {"id": "E02", "question": "各地区总收入从高到低是怎么排的？", "must_contain": ["West", "1,345,582"]},
+    {"id": "E03", "question": "East 地区的总订单数是多少？", "must_contain": ["1,227"]},
+    {"id": "E04", "question": "Beauty 品类的总收入是多少？", "must_contain": ["765,860"]},
+    {"id": "E05", "question": "收入最低的地区是哪个？", "must_contain": ["East", "1,236,044"]}
+]

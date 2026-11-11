@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data/tasks.db
+.env
+check_db.py
+eval_cases.py
