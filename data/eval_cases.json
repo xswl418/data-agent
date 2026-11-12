@@ -3,5 +3,10 @@
     {"id": "E02", "question": "各地区总收入从高到低是怎么排的？", "must_contain": ["West", "1,345,582"]},
     {"id": "E03", "question": "East 地区的总订单数是多少？", "must_contain": ["1,227"]},
     {"id": "E04", "question": "Beauty 品类的总收入是多少？", "must_contain": ["765,860"]},
-    {"id": "E05", "question": "收入最低的地区是哪个？", "must_contain": ["East", "1,236,044"]}
+    {"id": "E05", "question": "收入最低的地区是哪个？", "must_contain": ["East", "1,236,044"]},
+    {"id": "E06", "question": "East 和 West 地区的总收入相差多少？", "must_contain": ["109,537"]},
+    {"id": "E07", "question": "Electronics 和 Home 品类的订单数哪个更多？", "must_contain": ["Electronics", "1,777"]},
+    {"id": "E08", "question": "revenue 列有多少个异常值？", "must_contain": ["67"]},
+    {"id": "E09", "question": "East 地区的 revenue 异常值有多少个？", "must_contain": ["22"]},
+    {"id": "E10", "question": "哪个品类的平均收入最高？", "must_contain": ["Beauty", "1,059"]}
 ]

@@ -7,7 +7,7 @@
 ```
 data_agent/
 ├── agent.py        # LangGraph Agent：状态定义、节点、图编排
-├── tools.py        # 数据工具层：group_and_agg、filter_and_agg、get_summary
+├── tools.py        # 数据工具层：group_and_agg、filter_and_agg、get_summary、compare_groups、detect_anomaly
 ├── database.py     # SQLite 持久化：建表、写入、查询
 ├── main.py         # FastAPI 服务：/ask 和 /tasks 接口
 ├── data/
@@ -19,7 +19,7 @@ data_agent/
 
 ## 核心设计
 
-**受控工具执行**：模型只能调用白名单工具（`group_and_agg`、`filter_and_agg`、`get_summary`），参数经 tool_definitions 约束，不生成或执行任意代码。
+**受控工具执行**：模型只能调用白名单工具（`group_and_agg`、`filter_and_agg`、`get_summary`、`compare_groups`、`detect_anomaly`），参数经 tool_definitions 约束，不生成或执行任意代码。
 
 **Evidence 溯源**：每次工具调用记录工具名、参数、返回值，报告中的数字均可追溯到具体的工具调用。
 
@@ -29,8 +29,7 @@ data_agent/
 
 ## 当前不足
 
-- 工具覆盖有限，目前只有 3 个工具，缺少对比、异常检测等能力
-- 评测规模小，仅 5 道题，覆盖场景有限
+- 评测规模小，仅 10 道题，覆盖场景有限
 - 报告生成依赖模型描述数量，偶有计数偏差
 - 无身份验证，接口完全开放
 
